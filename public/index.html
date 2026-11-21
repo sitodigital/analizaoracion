@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#183d55"><meta name="description" content="Analiza sintáctica y morfológicamente oraciones y textos en español. Aprende con explicaciones interactivas.">
+  <title>ANALIZALAORACION · Análisis sintáctico y morfológico</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="/"><span class="brand-mark"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 5h16l8 8v22H8z"/><path d="M24 5v9h8M13 20h14M13 25h9"/><circle cx="27" cy="28" r="7"/><path d="m24 28 2 2 4-5"/></svg></span><span>ANALIZALAORACION<small>GRAMÁTICA INTERACTIVA</small></span></a><div class="top-actions"><span class="online-dot"></span><span>Motor avanzado</span><button class="icon-button" id="helpBtn" aria-label="Ayuda" title="Ayuda">?</button></div></header>
+<main class="shell">
+  <section class="hero"><div class="eyebrow">TU AULA DE LENGUA, SIEMPRE A MANO</div><h1>Entiende cada palabra.<br><span>Descubre cómo funciona.</span></h1><p>Introduce una oración o un texto y obtén su análisis sintáctico y morfológico, explicado paso a paso.</p></section>
+  <section class="workspace">
+    <div class="input-card panel">
+      <div class="section-heading"><div><span class="step">01</span><h2>Tu texto</h2></div><span class="muted small">Hasta 12.000 caracteres</span></div>
+      <textarea id="sourceText" maxlength="12000" placeholder="Escribe aquí tu oración o texto...&#10;&#10;Ejemplo: La profesora explicó la lección a sus alumnos."></textarea>
+      <div class="input-footer"><span id="charCount">0 / 12.000</span><button class="text-button" id="clearBtn">Limpiar texto</button></div>
+      <div class="source-tools"><label class="tool-button" for="imageInput"><span class="tool-icon">▧</span><span><b>Subir fotografía</b><small>JPG, PNG o WEBP</small></span></label><input id="imageInput" type="file" accept="image/*" hidden><button class="tool-button" id="cameraBtn"><span class="tool-icon">◎</span><span><b>Usar cámara</b><small>Captura un texto</small></span></button><button class="tool-button" id="sampleBtn"><span class="tool-icon">✎</span><span><b>Probar ejemplo</b><small>Ver cómo funciona</small></span></button></div>
+      <div class="ocr-status" id="ocrStatus" aria-live="polite"></div>
+      <button class="analyze-btn" id="analyzeBtn"><span>Analizar oración</span><span>→</span></button>
+      <p class="privacy-note">✦ Tus imágenes se procesan en el navegador para extraer el texto. Solo el texto se envía al motor de análisis.</p>
+    </div>
+    <div class="side-note"><div class="note-icon">✦</div><h3>Aprender, no solo resolver</h3><p>Los resultados son interactivos. Pulsa cualquier palabra, categoría o función para consultar su explicación y ejemplos.</p><div class="mini-tags"><span>Morfología</span><span>Sintaxis</span><span>Explicaciones</span></div></div>
+  </section>
+  <section id="loading" class="loading-card hidden"><div class="loader"></div><div><b>Analizando tu texto…</b><p>Identificando categorías, funciones y relaciones gramaticales.</p></div></section>
+  <section id="errorBox" class="error-box hidden" role="alert"></section>
+  <section id="results" class="results hidden">
+    <div class="results-head"><div><span class="step">02</span><h2>Resultado del análisis</h2><p id="overview"></p></div><button class="outline-button" id="printBtn">↗ Imprimir</button></div>
+    <div class="legend"><span><i class="dot subject"></i>Sujeto</span><span><i class="dot predicate"></i>Predicado</span><span><i class="dot complement"></i>Complementos</span><span class="muted">Pulsa los elementos para aprender</span></div>
+    <div id="sentenceResults"></div>
+    <div id="notesBox" class="notes-box hidden"></div>
+  </section>
+  <footer><span>ANALIZALAORACION</span><span>Una herramienta para comprender la lengua española.</span><span>Creado por <strong>Alfonso M. Martín Boza</strong> · © 2026</span></footer>
+</main>
+<div class="modal-backdrop hidden" id="cameraModal"><div class="modal"><div class="modal-head"><div><span class="eyebrow">CAPTURA DE TEXTO</span><h3>Escanea con tu cámara</h3></div><button class="icon-button" id="closeCamera" aria-label="Cerrar">×</button></div><video id="cameraVideo" autoplay playsinline></video><canvas id="cameraCanvas" hidden></canvas><p class="muted small">Coloca el texto dentro del encuadre y procura que haya buena iluminación.</p><button class="analyze-btn" id="captureBtn">Capturar y extraer texto</button></div></div>
+<div class="toast" id="toast" role="status"></div>
+<script src="/app.js"></script>
+</body></html>
