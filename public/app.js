@@ -5,7 +5,7 @@ let cameraStream = null, activeDetail = null;
 sourceText.addEventListener('input', () => $('#charCount').textContent = `${sourceText.value.length.toLocaleString('es-ES')} / 12.000`);
 $('#clearBtn').addEventListener('click', () => { sourceText.value=''; sourceText.dispatchEvent(new Event('input')); $('#ocrStatus').textContent=''; sourceText.focus(); });
 $('#sampleBtn').addEventListener('click', () => { sourceText.value='La profesora explicó la lección a sus alumnos porque mañana tendrán un examen.'; sourceText.dispatchEvent(new Event('input')); sourceText.focus(); });
-$('#helpBtn').addEventListener('click', () => toast('Escribe un texto, sube una foto o utiliza la cámara. Después pulsa «Analizar oración». En los resultados, pulsa palabras o etiquetas para ver sus explicaciones.'));
+$('#helpBtn').addEventListener('click', () => toast('Escribe un texto, sube una foto o utiliza la cámara. Después pulsa «Analizar oración». El motor gratuito ofrece un análisis orientativo; revisa especialmente las funciones sintácticas. Pulsa palabras o etiquetas para ver sus explicaciones.'));
 $('#printBtn').addEventListener('click', () => window.print());
 
 async function extractImage(file) {
